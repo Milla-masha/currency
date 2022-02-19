@@ -1,0 +1,57 @@
+<p-table #dt [value]="rates?.listOfRates" styleClass="p-datatable-gridlines" responsiveLayout="scroll"
+         [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+         [rowsPerPageOptions]="[10,25,50]"
+         [globalFilterFields]="['name','country.name','representative.name','status']">
+
+
+  <ng-template pTemplate="caption">
+    <div class="flex container-table-header">
+      <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)"></button>
+
+      <p-calendar [readonlyInput]="false"
+                  [(ngModel)]="dateValue"
+                  [showIcon]="true" icon="pi pi-calendar" [showButtonBar]="true"
+                  [touchUI]="true" (onSelect)="choseDate($event)"></p-calendar>
+    </div>
+
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="code" style="width: 20%">
+        <div class="container-thead-el align-items-center">
+         <div>Symbol waluty</div>
+          <p-columnFilter type="text" field="code" display="menu"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="currency" style="width: 60%">
+        <div class="container-thead-el align-items-center">
+          Waluta
+          <p-columnFilter type="text" field="currency" display="menu"></p-columnFilter>
+        </div>
+      <th pSortableColumn="value">
+        <div class="container-thead-el align-items-center">
+          Kurs Waluty
+          <p-columnFilter type="numeric" field="value" display="menu"></p-columnFilter>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rate>
+    <tr>
+      <td>{{rate.code}}</td>
+      <td>{{rate.currency}}</td>
+      <td>{{rate.value}}</td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="paginatorleft">
+    <app-themes-switcher></app-themes-switcher>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <p-message *ngIf="errorMessage" severity="error"  text="{{errorMessage}}"></p-message>
+  </ng-template>
+</p-table>
+

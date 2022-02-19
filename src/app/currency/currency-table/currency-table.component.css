@@ -1,0 +1,15 @@
+.container-table-header {
+  justify-content: space-between;
+  display: flex;
+}
+
+.container-thead-el {
+  display: flex;
+  justify-content :space-between;
+}
+
+>>>.p-button {
+  color: gray;
+  background: white;
+  border: 1px solid #ced4da;
+}
